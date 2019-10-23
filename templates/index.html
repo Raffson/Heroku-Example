@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Example Homepage{% endblock title %}
+
+{% block page_content %}
+    <p>Hello, index.html here!</p>
+    <p>{{some_text_name}}</p>
+    <p>Current year: {{current_year}}</p>
+{% if cities %}
+    <p>The cities variable exists.</p>
+{% else %}
+    <p>There are no cities :(</p>
+{% endif %}
+{% for city in cities %}
+    <p>{{city}}</p>
+{% endfor %}
+
+{% endblock page_content %}
