@@ -49,8 +49,10 @@ def github_callback():
 
     response = make_response(redirect(url_for('profile')))  # redirect to the profile page
     if local:
+	print("Not working properly!")
         response.set_cookie("oauth_token", json.dumps(token), httponly=True)
     else:
+	print("Working properly...")
         response.set_cookie("oauth_token", json.dumps(token), httponly=True, samesite='Strict')
 
     return response
