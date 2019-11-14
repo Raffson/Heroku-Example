@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
-{% block content %}
-<h1>Welcome to my website</h1>
+{% block title %}Example Homepage{% endblock title %}
 
-<p>This webpage is publicly accessible. Please log in to see your protected <a href="/profile">profile page</a></p>
+{% block page_content %}
+    <p>Hello, index.html here!</p>
+    <p>{{some_text_name}}</p>
+    <p>Current year: {{current_year}}</p>
+{% if cities %}
+    <p>The cities variable exists.</p>
+{% else %}
+    <p>There are no cities :(</p>
+{% endif %}
+{% for city in cities %}
+    <p>{{city}}</p>
+{% endfor %}
 
-<a href="/github/login">Click to login via GitHub</a>
-{% endblock content %}
+{% endblock page_content %}
