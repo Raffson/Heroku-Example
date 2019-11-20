@@ -36,22 +36,20 @@ def github_callback():
                                authorization_response=request.url)
 
     response = make_response(redirect(url_for('profile')))  # redirect to the profile page
-    if local:
-	print("Not working properly!")
-        response.set_cookie("oauth_token", json.dumps(token), httponly=True)
-    else:
-	print("Working properly...")
-        response.set_cookie("oauth_token", json.dumps(token), httponly=True, secure=True)
-
+    response.set_cookie("oauth_token", json.dumps(token), httponly=True, secure=True)
     return response
 
 
 @app.route("/profile")
 def profile():
-    github = OAuth2Session(os.environ.get("GITHUB_CLIENT_ID"), token=json.loads(request.cookies.get("oauth_token")))
-    github_profile_data = github.get('https://api.github.com/user').json()
-
-    return render_template("profile.html", github_profile_data=github_profile_data)
+    token = request.cookies.get("oauth_token")
+    if token:
+        github = OAuth2Session(os.environ.get("GITHUB_CLIENT_ID"), token=json.loads(token))
+        github_profile_data = github.get('https://api.github.com/user').json()
+        return render_template("profile.html", github_profile_data=github_profile_data)
+    else:
+        response = make_response(redirect(url_for('index')))
+        return response
 
 
 @app.route("/github/logout")
