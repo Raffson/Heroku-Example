@@ -2,20 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Hello, SmartNinja</title>
-
+        <title>{% block title %}{% endblock title %}</title>
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
 
     <body>
-        <p>
-            <a href="/">Home</a> |
-            <a href="/profile">My profile</a> |
-            <a href="/github/login">Login</a> |
-            <a href="/github/logout">Logout</a>
-        </p>
-
-        {% block content %}
-        {% endblock content %}
+        <h1>Let's try out Jinja!</h1>
+        {% block page_content %}
+        {% endblock page_content %}
     </body>
 </html>
